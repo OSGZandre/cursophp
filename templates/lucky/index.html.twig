@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LuckyController!{% endblock %}
+{% block body %}
+
+
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .salvar 
+    { 
+        text-color: #0000; 
+        background-color : #0b7de0ff;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+    .salvar:hover 
+    {
+        background-color : #045eadff;
+        cursor: pointer;  
+    }
+</style>
+
+<div class="example-wrapper">
+    <input 
+    class=""
+    type="placeholder"
+    placeholder="Digite seu nome">
+    <br>
+    <input 
+    class="salvar"
+    type="button" 
+    value="Salvar Nome" 
+    onclick="salvarNome()">
+    <script>
+        function salvarNome() {            
+        }
+    </script>
+    </input>
+    <h2> Lucky number: {{ number }} </h2>
+    <h2> Nome: {{ name.name }} </h2>
+</div>  
+{% endblock %}
