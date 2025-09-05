@@ -15,9 +15,12 @@ class Name
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */ 
     private $name;
-    private $type;
 
     public function getId(): ?int
     {
@@ -31,15 +34,6 @@ class Name
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = 
-        $dono = new Type($type);
-        $cliente = new Type($type);
 
         return $this;
     }
