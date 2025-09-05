@@ -2,32 +2,36 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Name;
-
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class LuckyController extends AbstractController
 {
-    public function index(Name $name): Response
-    {
-        return $this->render('lucky/index.html.twig', 
-        [
-            'controller_name' => 'LuckyController',
-            ''=> $name,
-        ]);
-    }
-    
-    
-    public function number(): Response
+    public function number(EntityManagerInterface $entityManager): Response
     {
         $number = random_int(0, 100);
-        return $this -> render
-        ( 
-            'lucky/index.html.twig', 
-            [
-            'number' => $number,            
+        $names = $entityManager->getRepository(Name::class)->findAll();
+
+        return $this->render('lucky/index.html.twig', [
+            'number' => $number,
+            'names' => $names,
         ]);
     }
+
+    
+    public function save(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if ($request->isMethod('POST')) {
+            $nomeDigitado = $request->request->get('nome');
+
+            if ($nomeDigitado) {
+                $name = new Name();
+                $name->setNome($nomeDigitado);
+
+    }
+    }
+  }
 }
