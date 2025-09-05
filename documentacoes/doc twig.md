@@ -146,3 +146,36 @@ O isFresh()método deve retornar truese o modelo em cache atual ainda estiver at
 
 O getSourceContext()método deve retornar uma instância de \Twig\Source.
 ```
+
+**markdown_to_html**
+
+- O markdown_to_htmlfiltro converte um bloco de Markdown em HTML:
+
+```twig
+{% apply markdown_to_html %}
+Title
+=====
+
+
+Hello!
+{% endapply %}
+```
+
+- Observe que você pode recuar o conteúdo Markdown, pois os espaços em branco iniciais serão removidos consistentemente antes da conversão:
+
+```twig
+{% apply markdown_to_html %}
+    Title
+    =====
+
+    Hello!
+{% endapply %}
+```
+
+- Você também pode usar o filtro em um arquivo incluído ou em uma variável:
+
+```twig
+{{ include('some_template.markdown.twig')|markdown_to_html }}
+
+{{ changelog|markdown_to_html }}
+```
