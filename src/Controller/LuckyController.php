@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Name;
+use App\Entity\UserTable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,25 +13,28 @@ class LuckyController extends AbstractController
     public function number(EntityManagerInterface $entityManager): Response
     {
         $number = random_int(0, 100);
-        $names = $entityManager->getRepository(Name::class)->findAll();
-
+        $name = $entityManager->getRepository(UserTable::class)->findAll();
+        
         return $this->render('lucky/index.html.twig', [
             'number' => $number,
-            'names' => $names,
+            'name' => $name,
         ]);
     }
-
+    
     
     public function save(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if ($request->isMethod('POST')) {
-            $nomeDigitado = $request->request->get('nome');
-
-            if ($nomeDigitado) {
-                $name = new Name();
-                $name->setNome($nomeDigitado);
-
+        //dd($request);
+        
+        $nomeDigitado = $request->get('name');
+        
+        
+        $name = new UserTable();
+        $name->setName($nomeDigitado);
+        $entityManager->getRepository(UserTable::class)->add($name, true);
+        
+        
+        return $this->redirectToRoute('app_lucky_number');
+        
     }
-    }
-  }
 }

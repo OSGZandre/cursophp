@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Hello LuckyController!{% endblock %}
 {% block body %}
 
@@ -23,22 +22,17 @@
 </style>
 
 <div class="example-wrapper">
-    <input 
-    class=""
-    type="placeholder"
-    placeholder="Digite seu nome">
-    <br>
-    <input 
-    class="salvar"
-    type="button" 
-    value="Salvar Nome" 
-    onclick="salvarNome()">
-    <script>
-        function salvarNome() {            
-        }
-    </script>
-    </input>
-    <h2> Lucky number: {{ number }} </h2>
-    <h2> Nome: {{ name.name }} </h2>
+    <form action="{{ url('app_lucky_save') }}" method="post">
+        <input type="text" name="name" placeholder="Digite seu nome"/>
+        <button class="salvar" type="submit">Salvar</button>
+    </form>
+    {% if name != false %}
+        {% for row in name %}
+        <h2> Lucky number: {{ number }} </h2>
+        <h2> Nome: {{ row.name }} </h2>
+        <hr />
+        {% endfor %}
+
+    {% endif %}
 </div>  
 {% endblock %}
