@@ -20,7 +20,7 @@ class AdminController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager ): Response
     {
-        $user = $entityManager ->getRepository(UserTable::class)->findALl();
+        $user = $entityManager ->getRepository(UserTable::class)->findAll();
         return $this->render('admin/index.html.twig', [
             'user' => $user,
         ]);
@@ -31,14 +31,12 @@ class AdminController extends AbstractController
      */
     public function editUser(UserTable $user, EntityManagerInterface $entityManager, Request $request): Response
     {
-        dd($user);
-        $user = $entityManager->getRepository(UserTable::class)->find($user->getId());
         $user->setName($request->request->get('name'));
         $user->setEmail($request->request->get('email'));
         $user->setTelephoneNumber($request->request->get('telephoneNumber'));
 
-        $entityManager->persist($user);
         $entityManager->flush();
-        return $this->redirectToRoute('app_admin_edit'['user'->$user]);    
+
+        return $this->redirectToRoute('app_admin_edit', ['id' => $user->getId()]);
     }
 }
