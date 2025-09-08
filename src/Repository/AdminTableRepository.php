@@ -39,6 +39,9 @@ class AdminTableRepository extends ServiceEntityRepository
         }
     }
 
+    public function findById(int $id): AdminTable{
+        return $this->getEntityManager()->find(AdminTable::class, $id);
+    }
 //    /**
 //     * @return AdminTable[] Returns an array of AdminTable objects
 //     */

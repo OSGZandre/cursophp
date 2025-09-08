@@ -30,7 +30,7 @@ class UserTable
     private $email;
 
     /**
-     * @ORM\Column(type="string", name="telephoneNumber" length=50)
+     * @ORM\Column(type="string", name="telephoneNumber")
      */
     private $telephoneNumber;
 

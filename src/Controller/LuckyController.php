@@ -8,9 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\UserRepository;
-
+use Symfony\Component\Routing\Annotation\Route;
 class LuckyController extends AbstractController
 {
+
+    /**
+     * @Route("/lucky/number", name="app_lucky_number")
+     */
     public function number(EntityManagerInterface $entityManager): Response
     {
         $name = $entityManager->getRepository(UserTable::class)->findAll();

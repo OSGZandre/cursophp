@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AdminTableRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use App\Entity\UserTable;
 /**
  * @ORM\Entity(repositoryClass=AdminTableRepository::class)
  */
