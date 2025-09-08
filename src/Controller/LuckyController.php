@@ -7,31 +7,36 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Repository\UserRepository;
 
 class LuckyController extends AbstractController
 {
     public function number(EntityManagerInterface $entityManager): Response
     {
-        $number = random_int(0, 100);
         $name = $entityManager->getRepository(UserTable::class)->findAll();
-        
+        $email = $entityManager->getRepository(UserTable::class)->findAll();
+        $telephoneNumber = $entityManager->getRepository(UserTable::class)->findAll();
         return $this->render('lucky/index.html.twig', [
-            'number' => $number,
             'name' => $name,
+            'email' => $email,
+            'telephoneNumber' => $telephoneNumber,
         ]);
     }
     
     
-    public function save(Request $request, EntityManagerInterface $entityManager): Response
+    public function saveName(Request $request, EntityManagerInterface $entityManager): Response
     {
-        //dd($request);
         
         $nomeDigitado = $request->get('name');
+        $emailDigitado = $request->get('email');
+        $telephoneNumber = $request->get('telephoneNumber');
         
-        
-        $name = new UserTable();
-        $name->setName($nomeDigitado);
-        $entityManager->getRepository(UserTable::class)->add($name, true);
+        $user = new UserTable();
+        $user->setName($nomeDigitado);
+        $user->setEmail($emailDigitado);
+        $user->setTelephoneNumber($telephoneNumber);
+        $entityManager->getRepository(UserTable::class)->add($user, true);
+        //dd($telephoneNumber);
         
         
         return $this->redirectToRoute('app_lucky_number');

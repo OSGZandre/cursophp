@@ -38,6 +38,14 @@ class UserTableRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAll(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->getQuery()
+            ->getResult();
+    }
+
     
 //    /**
 //     * @return UserTable[] Returns an array of UserTable objects

@@ -23,6 +23,17 @@ class UserTable
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @var 
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", name="telephoneNumber" length=50)
+     */
+    private $telephoneNumber;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,6 +47,30 @@ class UserTable
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getTelephoneNumber(): ?string
+    {
+        return $this->telephoneNumber;
+    }
+
+    public function setTelephoneNumber(string $telephoneNumber): self
+    {
+        $this->telephoneNumber = $telephoneNumber;
 
         return $this;
     }

@@ -1,8 +1,8 @@
 app_lucky_number:
-  path: /lucky/number 
+  path: /lucky/number
   controller: App\Controller\LuckyController::number
 
 app_lucky_save:
-    path: /lucky/save
-    controller: App\Controller\LuckyController::save
-    methods: [POST]
+  path: /lucky/save
+  controller: App\Controller\LuckyController::saveName
+  methods: [POST]
