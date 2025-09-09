@@ -9,21 +9,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
+
 class LuckyController extends AbstractController
 {
-
     /**
-     * @Route("/lucky/number", name="app_lucky_number")
+     * @Route("/lucky/number", name="app_lucky_number", methods={"GET"})
      */
     public function number(EntityManagerInterface $entityManager): Response
     {
-        $name = $entityManager->getRepository(UserTable::class)->findAll();
-        $email = $entityManager->getRepository(UserTable::class)->findAll();
-        $telephoneNumber = $entityManager->getRepository(UserTable::class)->findAll();
+        $users = $entityManager->getRepository(UserTable::class)->findAll();
         return $this->render('lucky/index.html.twig', [
-            'name' => $name,
-            'email' => $email,
-            'telephoneNumber' => $telephoneNumber,
+            'users' => $users,  // Use um único array para loop
         ]);
     }
     
