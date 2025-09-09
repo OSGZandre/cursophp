@@ -35,25 +35,25 @@
 </style>
 
 <div class="example-wrapper">
-
-    <form action="{{ url('app_lucky_number') }}" method="post">
-        <input type="text" name="name" placeholder="Digite seu nome"/> <br />
-        <input type="email" name="email" placeholder="Digite seu Email"/> <br />
-        <input type="tel" name="telephoneNumber" placeholder="Digite seu Telefone"/>  <br />
-        <button class="salvar" type="submit">Salvar</button>
-    </form>
-    <hr />
-    <h1> Usuários Cadastrados </h1> 
-    <div class="usuarios">
-    {% if name != false %}
-        {% for row in name %}
-        <h2> Nome: {{ row.name }} </h2>
-        <h2> Email: {{ row.email }} </h2>
-        <h2> Telefone: {{ row.telephoneNumber }} </h2>
-
+        <form action="{{ path('app_lucky_save') }}" method="post">  <!-- Mudei para rota de save, POST -->
+            <input type="text" name="name" placeholder="Digite seu nome"/> <br />
+            <input type="email" name="email" placeholder="Digite seu Email"/> <br />
+            <input type="tel" name="telephoneNumber" placeholder="Digite seu Telefone"/> <br />
+            <button class="salvar" type="submit">Salvar</button>
+        </form>
         <hr />
-        {% endfor %}
-    {% endif %}
+        <h1>Usuários Cadastrados</h1>
+        <div class="usuarios">
+            {% if users|length > 0 %}
+                {% for row in users %}  <!-- Corrigi para users -->
+                    <h2>Nome: {{ row.name }}</h2>
+                    <h2>Email: {{ row.email }}</h2>
+                    <h2>Telefone: {{ row.telephoneNumber }}</h2>
+                    <hr />
+                {% endfor %}
+            {% else %}
+                <p>Nenhum usuário.</p>
+            {% endif %}
+        </div>
     </div>
-</div>  
 {% endblock %}
