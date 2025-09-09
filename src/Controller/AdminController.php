@@ -31,12 +31,18 @@ class AdminController extends AbstractController
      */
     public function editUser(UserTable $user, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $user->setName($request->request->get('name'));
-        $user->setEmail($request->request->get('email'));
-        $user->setTelephoneNumber($request->request->get('telephoneNumber'));
+        if ($request->isMethod('POST')) {
+            $user->setName($request->request->get('name') ?? $user->getName());
+            $user->setEmail($request->request->get('email') ?? $user->getEmail());
+            $user->setTelephoneNumber($request->request->get('telephoneNumber') ?? $user->getTelephoneNumber());
 
-        $entityManager->flush();
+            $entityManager->flush();
 
-        return $this->redirectToRoute('app_admin_edit', ['id' => $user->getId()]);
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('admin/edit.html.twig', [
+            'user' => $user,
+        ]);
     }
 }
