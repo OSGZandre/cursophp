@@ -35,7 +35,7 @@
 </style>
 
 <div class="example-wrapper">
-        <form action="{{ path('app_lucky_save') }}" method="post">  <!-- Mudei para rota de save, POST -->
+        <form action="{{ path('app_lucky_save') }}" method="post">
             <input type="text" name="name" placeholder="Digite seu nome"/> <br />
             <input type="email" name="email" placeholder="Digite seu Email"/> <br />
             <input type="tel" name="telephoneNumber" placeholder="Digite seu Telefone"/> <br />
@@ -45,7 +45,7 @@
         <h1>Usuários Cadastrados</h1>
         <div class="usuarios">
             {% if users|length > 0 %}
-                {% for row in users %}  <!-- Corrigi para users -->
+                {% for row in users %}
                     <h2>Nome: {{ row.name }}</h2>
                     <h2>Email: {{ row.email }}</h2>
                     <h2>Telefone: {{ row.telephoneNumber }}</h2>

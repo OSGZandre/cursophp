@@ -22,7 +22,7 @@ class AdminController extends AbstractController
     {
         $user = $entityManager ->getRepository(UserTable::class)->findAll();
         return $this->render('admin/index.html.twig', [
-            'user' => $user,
+            'users' => $user,
         ]);
     }
 
