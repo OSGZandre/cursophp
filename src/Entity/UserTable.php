@@ -34,6 +34,14 @@ class UserTable
      */
     private $telephoneNumber;
 
+
+    /**
+     * @ORM\Column(type="integer", name="isAdmin",  length=1)
+     * 
+     */
+    private $isAdmin;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,5 +81,15 @@ class UserTable
         $this->telephoneNumber = $telephoneNumber;
 
         return $this;
+    }
+    public function setAdmin(int $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+    public function getAdmin(): ?int
+    {
+        return $this->isAdmin;
     }
 }

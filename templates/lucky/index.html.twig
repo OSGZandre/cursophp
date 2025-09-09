@@ -36,10 +36,16 @@
 
 <div class="example-wrapper">
         <form action="{{ path('app_lucky_save') }}" method="post">
-            <input type="text" name="name" placeholder="Digite seu nome"/> <br />
-            <input type="email" name="email" placeholder="Digite seu Email"/> <br />
-            <input type="tel" name="telephoneNumber" placeholder="Digite seu Telefone"/> <br />
-            <button class="salvar" type="submit">Salvar</button>
+            <div class="mb-3" ><h1>Cadastro de Usuário</h1>
+                <label class="form-label">Nome</label>
+                <input type="text" class="form-control" name="name" placeholder="Digite seu nome"/> <br />
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Digite seu Email"/> <br />
+                <label for="exampleInputEmail1" class="form-label">Número de telefone</label>
+                <input class="form-control" type="tel" name="telephoneNumber" placeholder="Digite seu Telefone"/> <br />
+
+                <button class="btn btn-primary" type="submit">Salvar</button>
+            </div>
         </form>
         <hr />
         <h1>Usuários Cadastrados</h1>

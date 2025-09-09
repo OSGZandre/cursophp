@@ -29,17 +29,17 @@ class LuckyController extends AbstractController
      */
     public function saveName(Request $request, EntityManagerInterface $entityManager): Response
     {
+        
         $nomeDigitado = $request->request->get('name');
         $emailDigitado = $request->request->get('email');
         $telephoneNumber = $request->request->get('telephoneNumber');
-
         $user = new UserTable();
         $user->setName($nomeDigitado);
         $user->setEmail($emailDigitado);
         $user->setTelephoneNumber($telephoneNumber);
-
-        $entityManager->persist($user);
-        $entityManager->flush();
+        $entityManager->getRepository(UserTable::class)->add($user, true);
+        //dd($user);
+        
 
         return $this->redirectToRoute('app_lucky_number');
     }

@@ -46,9 +46,19 @@ class UserTableRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findById(int $id): UserTable {
+    /**public function findById(int $id): UserTable {
         return $this->getEntityManager()->find(UserTable::class, $id);
      }
+
+     public function lis
+     $sql = "SELECT id, name, email, telephoneNumber, isAdmin
+        FROM userTable
+        WHERE ";
+
+	$query = $this->db->query($sql);
+	$this->db->close();
+	
+	return $query;
     
 //    /**
 //     * @return UserTable[] Returns an array of UserTable objects
