@@ -9,8 +9,8 @@ use App\Entity\AdminTable;
 use App\Repository\AdminTableRepository;
 use App\Entity\UserTable;
 use Doctrine\ORM\EntityManagerInterface;
+use \App\Repository\UserTableRepository;
 use Symfony\Component\HttpFoundation\Request;
-
 
 
 class AdminController extends AbstractController
@@ -22,7 +22,7 @@ class AdminController extends AbstractController
     {
         $user = $entityManager ->getRepository(UserTable::class)->findAll();
         return $this->render('admin/index.html.twig', [
-            'users' => $user,
+            'user' => $user,
         ]);
     }
 
@@ -32,10 +32,10 @@ class AdminController extends AbstractController
     public function editUser(UserTable $user, EntityManagerInterface $entityManager, Request $request): Response
     {
         if ($request->isMethod('POST')) {
+            $user->getId();
             $user->setName($request->request->get('name') ?? $user->getName());
             $user->setEmail($request->request->get('email') ?? $user->getEmail());
             $user->setTelephoneNumber($request->request->get('telephoneNumber') ?? $user->getTelephoneNumber());
-
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin');

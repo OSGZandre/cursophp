@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Editar Usuário</h1>
+    <div class="usuarios">
+        {% if user is not null %}
+            <h2>ID: {{ user.id }}</h2>  
+            <h2>Nome: {{ user.name }}</h2>
+            <h2>Email: {{ user.email }}</h2>
+            <h2>Telefone: {{ user.telephoneNumber }}</h2>
+            <hr /> 
+            <form action="{{ path('app_admin_edit', {id: user.id}) }}" method="post"> 
+            <input name="name" value="{{ user.name }}" />
+            <input type="email" name="email" value="{{ user.email }}" />
+            <input name="telephoneNumber" value="{{ user.telephoneNumber }}" />
+            <input type="submit" value="Salvar"/>
+            </form>
+            <a href="{{ path('app_admin') }}">Voltar</a>
+        {% else %}
+            <p>Nenhum usuário encontrado.</p>
+        {% endif %}
+</div>
+{% endblock %}

@@ -11,8 +11,8 @@
 <div class="example-wrapper">
     <h1>Usuários Cadastrados</h1>
     <div class="usuarios">
-        {% if users|length > 0 %}
-            {% for user in users %}
+        {% if user|length > 0 %}
+            {% for user in user %}
                 <h2>Nome: {{ user.name }}</h2>
                 <h2>Email: {{ user.email }}</h2>
                 <h2>Telefone: {{ user.telephoneNumber }}</h2>
