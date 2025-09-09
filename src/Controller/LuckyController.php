@@ -19,7 +19,7 @@ class LuckyController extends AbstractController
     {
         $users = $entityManager->getRepository(UserTable::class)->findAll();
         return $this->render('lucky/index.html.twig', [
-            'users' => $users,  // Use um único array para loop
+            'users' => $users,  
         ]);
     }
     
