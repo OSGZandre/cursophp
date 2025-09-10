@@ -15,44 +15,61 @@ class AdminTable
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $idAdmin;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, name="nameAdmin")
      */
-    private $name;
+    private $nameAdmin;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, name="emailAdmin" nullable=true)
      */
-    private $email;
+    private $emailAdmin;
+
+    /**
+        * @ORM\Column(type="string", name="telephoneAdmin")
+     * @var 
+     */
+    private $telephoneAdmin;
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->idAdmin;
     }
 
-    public function getName(): ?string
+    public function getNameAdmin(): ?string
     {
-        return $this->name;
+        return $this->nameAdmin;
     }
-
-    public function setName(string $name): self
+    public function setNameAdmin(?string $nameAdmin): self
     {
-        $this->name = $name;
+        $this->nameAdmin = $nameAdmin;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmailAdmin(): ?string
     {
-        return $this->email;
+        return $this->emailAdmin;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmailAdmin(?string $emailAdmin): self
     {
-        $this->email = $email;
+        $this->emailAdmin = $emailAdmin;
 
         return $this;
     }
+
+    public function getTelephoneAdmin(): ?string
+    {
+        return $this->telephoneAdmin;
+    }
+
+    public function setTelephoneAdmin(string $telephoneAdmin): self
+    {
+        $this->telephoneAdmin = $telephoneAdmin;
+
+        return $this;
+    }   
 }

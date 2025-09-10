@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\UserTable;
+use App\Entity\AdminTable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,8 @@ class LuckyController extends AbstractController
         $nomeDigitado = $request->request->get('name');
         $emailDigitado = $request->request->get('email');
         $telephoneNumber = $request->request->get('telephoneNumber');
+        
+        //dd($nomeDigitado, $emailDigitado, $telephoneNumber);
         $user = new UserTable();
         $user->setName($nomeDigitado);
         $user->setEmail($emailDigitado);
@@ -43,4 +46,23 @@ class LuckyController extends AbstractController
 
         return $this->redirectToRoute('app_lucky_number');
     }
+
+    /**
+     * @Route("/lucky/saveAdmin", name="app_lucky_saveAdmin", methods={"POST"})
+     */
+    public function saveAdmin(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $nameAdmin = $request->request->get('nameAdmin');
+        $emailAdmin = $request->request->get('emailAdmin');
+        $telephoneAdmin = $request->request->get('telephoneAdmin');
+
+        $admin = new AdminTable();
+        $admin->setNameAdmin($nameAdmin);
+        $admin->setEmailAdmin($emailAdmin);
+        $admin->setTelephoneAdmin($telephoneAdmin);
+        $entityManager->getRepository(AdminTable::class)->add($admin, true);
+
+        return $this->redirectToRoute('app_lucky_number');
+    }
+ 
 }
