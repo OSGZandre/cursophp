@@ -23,7 +23,7 @@ class AdminTable
     private $nameAdmin;
 
     /**
-     * @ORM\Column(type="string", length=50, name="emailAdmin" nullable=true)
+     * @ORM\Column(type="string", length=50, name="emailAdmin")
      */
     private $emailAdmin;
 
@@ -54,10 +54,9 @@ class AdminTable
         return $this->emailAdmin;
     }
 
-    public function setEmailAdmin(?string $emailAdmin): self
+    public function setEmailAdmin(?string $emailAdmin): self 
     {
         $this->emailAdmin = $emailAdmin;
-
         return $this;
     }
 
