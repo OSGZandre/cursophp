@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Produto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * @extends ServiceEntityRepository<Produto>
@@ -16,9 +17,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProdutoRepository extends ServiceEntityRepository
 {
+    private $entityManager;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Produto::class);
+        $this->conn = $registry->getManager()->getConnection();
     }
 
     public function add(Produto $entity, bool $flush = false): void
@@ -37,6 +40,14 @@ class ProdutoRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function buscaProduto(): void
+    {
+        $sql = "SELECT * FROM produto WHERE idProduto = :idProduto";
+        $this->entityManager->query($sql);
+
+     
     }
 
 //    /**

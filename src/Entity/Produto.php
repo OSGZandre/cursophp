@@ -15,7 +15,7 @@ class Produto
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $idProduto;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -34,7 +34,7 @@ class Produto
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->idProduto;
     }
 
     public function getNameProduto(): ?string
