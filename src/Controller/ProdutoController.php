@@ -21,7 +21,7 @@ class ProdutoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $pdo = new \PDO("mysql:host=localhost;bd_teste;charset=utf8", "andre", "abc123!");
+            $pdo = new \PDO("mysql:host=172.0.0.22;port=3306;dbname=bd_teste;charset=utf8", "andre", "abc123!");
             $stmt = $pdo->prepare("INSERT INTO produto (nameProduto, preco, estoque) VALUES (:nameProduto, :preco, :estoque)");
             $stmt->bindValue(':nameProduto', $data['nameProduto']);
             $stmt->bindValue(':preco', $data['preco']);
@@ -29,7 +29,7 @@ class ProdutoController extends AbstractController
             $stmt->execute();
         }
 
-        return $this->render('produto/novo.html.twig', [
+        return $this->render('produto/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }

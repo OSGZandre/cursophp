@@ -25,7 +25,7 @@ class Produto
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      */
-    private $produto;
+    private $preco;
 
     /**
      * @ORM\Column(type="integer")
@@ -49,14 +49,14 @@ class Produto
         return $this;
     }
 
-    public function getProduto(): ?string
+    public function getPreco(): ?string
     {
-        return $this->produto;
+        return $this->preco;
     }
 
-    public function setProduto(?string $produto): self
+    public function setPreco(?string $preco): self
     {
-        $this->produto = $produto;
+        $this->preco = $preco;
 
         return $this;
     }
