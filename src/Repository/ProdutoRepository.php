@@ -5,73 +5,58 @@ namespace App\Repository;
 use App\Entity\Produto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Persistence\ObjectManager;
 
-/**
- * @extends ServiceEntityRepository<Produto>
- *
- * @method Produto|null find($id, $lockMode = null, $lockVersion = null)
- * @method Produto|null findOneBy(array $criteria, array $orderBy = null)
- * @method Produto[]    findAll()
- * @method Produto[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class ProdutoRepository extends ServiceEntityRepository
 {
-    private $entityManager;
+    private $conn;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Produto::class);
         $this->conn = $registry->getManager()->getConnection();
     }
 
-    public function add(Produto $entity, bool $flush = false): void
+    public function listaProdutos()
     {
-        $this->getEntityManager()->persist($entity);
+        $sql = "SELECT idProduto, nameProduto, preco, estoque FROM produto";
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $query = $this->conn->query($sql);
+        return $query->fetchAll();
     }
 
-    public function remove(Produto $entity, bool $flush = false): void
+    public function buscaProdutoPorId($idProduto)
     {
-        $this->getEntityManager()->remove($entity);
+        $sql = "SELECT idProduto, nameProduto, preco, estoque FROM produto WHERE idProduto = :idProduto";
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':idProduto', $idProduto);
+        $stmt->execute();
+
+        return $stmt->fetch();
     }
 
-    public function buscaProduto(): void
+    public function inserirProduto($data)
     {
-        $sql = "SELECT * FROM produto WHERE idProduto = :idProduto";
-        $this->entityManager->query($sql);
+        $sql = "INSERT INTO produto (nameProduto, preco, estoque) VALUES (:nameProduto, :preco, :estoque)";
 
-     
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':nameProduto', $data['nameProduto']);
+        $stmt->bindValue(':preco', $data['preco']);
+        $stmt->bindValue(':estoque', $data['estoque']);
+
+        return $stmt->execute();
     }
 
-//    /**
-//     * @return Produto[] Returns an array of Produto objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function atualizarProduto($data)
+    {
+        $sql = "UPDATE produto SET nameProduto = :nameProduto, preco = :preco, estoque = :estoque WHERE idProduto = :idProduto";
 
-//    public function findOneBySomeField($value): ?Produto
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':nameProduto', $data['nameProduto']);
+        $stmt->bindValue(':preco', $data['preco']);
+        $stmt->bindValue(':estoque', $data['estoque']);
+        $stmt->bindValue(':idProduto', $data['idProduto']);
+
+        return $stmt->execute();
+    }
 }
